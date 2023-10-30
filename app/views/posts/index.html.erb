@@ -1,8 +1,18 @@
 <h1>Route Test</h1>
 
 <% if user_signed_in? %> 
- <div> Welcome <%= current_user.email %> </div> 
+ <div> Welcome number: <%= current_user.id %> Please enjoy</div> 
   <%= button_to "Sign out", destroy_user_session_path, method: :delete %> 
+  <%= link_to "New Post", new_post_path %>
 <% else %>
   <%= button_to "Sign in", new_user_session_path %> 
 <% end %>
+
+<ul>
+  <% @posts.each do |post| %>
+      <li>
+        <%=link_to post.title, post%>
+      </li>
+  <% end %>
+</ul>
+
