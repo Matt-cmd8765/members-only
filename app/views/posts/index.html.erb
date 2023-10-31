@@ -1,4 +1,4 @@
-<h1>Route Test</h1>
+<h1>Posts</h1>
 
 <% if user_signed_in? %> 
  <div> Welcome number: <%= current_user.id %> Please enjoy</div> 
@@ -10,9 +10,20 @@
 
 <ul>
   <% @posts.each do |post| %>
+    <% if user_signed_in? %>
+      <li>
+        <%=link_to post.title, post%>
+        <% @users.each do |user| %>
+          <% if user.id == post.user_id %>
+            <%= user.email %>
+          <% end %>
+        <% end %>
+      </li>
+    <% else %>
       <li>
         <%=link_to post.title, post%>
       </li>
+    <% end %>
   <% end %>
 </ul>
 
