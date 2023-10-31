@@ -11,7 +11,11 @@ class PostsController < ApplicationController
   def create
     @user = User.find(current_user.id)
     @post = @user.posts.create(post_params)
-    redirect_to root_path
+    if @post.save
+      redirect_to root_path
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def show
